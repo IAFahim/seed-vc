@@ -133,6 +133,29 @@ python real-time-gui.py --checkpoint-path <path-to-checkpoint> --config-path <pa
 - `checkpoint` is the path to the model checkpoint if you have trained or fine-tuned your own model, leave to blank to auto-download default model from huggingface. (`seed-uvit-tat-xlsr-tiny`)
 - `config` is the path to the model config if you have trained or fine-tuned your own model, leave to blank to auto-download default config from huggingface  
 
+### Preferred terminal preset
+
+With the project dependencies installed in `.venv`, run the saved settings that
+sounded best in local listening:
+
+```bash
+./run_realtime_best.sh
+```
+
+This uses the Whisper-small / BigVGAN checkpoint, the audio device's native sample
+rate, 0.4 s blocks, 1.5 s content-encoder left context, 0.3 s DiT left context,
+0.1 s right context, 10 diffusion steps, and a 5 s maximum prompt length.
+The checkpoint and matching config download automatically on first use.
+The default reference is `examples/reference/trump_0.wav`; pass a different
+reference or override other options by appending arguments:
+
+```bash
+./run_realtime_best.sh --reference examples/reference/teio_0.wav
+```
+
+The terminal loop is implemented in `realtime_loop.py`. Use
+`.venv/bin/python realtime_loop.py --help` for all available options.
+
 > [!IMPORTANT]
 > It is strongly recommended to use a GPU for real-time voice conversion.
 > Some performance testing has been done on a NVIDIA RTX 3060 Laptop GPU, results and recommended parameter settings are listed below:
